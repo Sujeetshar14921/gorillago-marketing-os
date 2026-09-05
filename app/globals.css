@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Surfaces */
+    --background: 210 20% 99%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Primary — deep navy/slate */
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 20% 98%;
+
+    /* Secondary — soft neutral */
+    --secondary: 210 16% 95%;
+    --secondary-foreground: 222 47% 11%;
+
+    /* Muted */
+    --muted: 210 16% 95%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Accent — teal */
+    --accent: 172 66% 40%;
+    --accent-foreground: 210 20% 98%;
+
+    /* Success — emerald */
+    --success: 152 56% 40%;
+    --success-foreground: 210 20% 98%;
+
+    /* Warning — amber */
+    --warning: 35 92% 50%;
+    --warning-foreground: 30 58% 12%;
+
+    /* Destructive — red */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 20% 98%;
+
+    /* Borders & inputs */
+    --border: 214 20% 90%;
+    --input: 214 20% 90%;
+    --ring: 172 66% 40%;
+
+    /* Sidebar */
+    --sidebar: 222 47% 11%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-accent: 172 66% 40%;
+    --sidebar-hover: 222 32% 18%;
+
+    /* Charts */
+    --chart-1: 172 66% 40%;
+    --chart-2: 198 80% 48%;
+    --chart-3: 152 56% 40%;
+    --chart-4: 35 92% 55%;
+    --chart-5: 246 70% 56%;
+
+    --radius: 0.625rem;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 20% 96%;
+    --card: 222 40% 10%;
+    --card-foreground: 210 20% 96%;
+    --popover: 222 40% 10%;
+    --popover-foreground: 210 20% 96%;
+
+    --primary: 210 20% 96%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 222 30% 16%;
+    --secondary-foreground: 210 20% 96%;
+
+    --muted: 222 30% 16%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 172 66% 45%;
+    --accent-foreground: 222 47% 6%;
+
+    --success: 152 56% 45%;
+    --success-foreground: 222 47% 6%;
+
+    --warning: 35 92% 55%;
+    --warning-foreground: 30 58% 12%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 222 30% 18%;
+    --input: 222 30% 18%;
+    --ring: 172 66% 45%;
+
+    --sidebar: 222 47% 8%;
+    --sidebar-foreground: 210 20% 88%;
+    --sidebar-accent: 172 66% 45%;
+    --sidebar-hover: 222 35% 14%;
+
+    --chart-1: 172 66% 45%;
+    --chart-2: 198 80% 52%;
+    --chart-3: 152 56% 45%;
+    --chart-4: 35 92% 58%;
+    --chart-5: 246 70% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-white/40 dark:border-white/10;
+  }
+  .glass-card {
+    @apply bg-white/80 dark:bg-card/80 backdrop-blur-xl border border-black/5 dark:border-white/10;
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--muted-foreground) / 0.5);
+  }
+}
+
+@layer keyframes {
+  @keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+  }
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(0.8); opacity: 0.8; }
+    100% { transform: scale(2); opacity: 0; }
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fade-in-up 0.4s ease-out forwards;
+  }
+  .animate-shimmer {
+    animation: shimmer 2s infinite linear;
+    background: linear-gradient(90deg, hsl(var(--muted)) 0%, hsl(var(--muted-foreground) / 0.1) 50%, hsl(var(--muted)) 100%);
+    background-size: 1000px 100%;
+  }
+}
