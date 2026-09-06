@@ -46,10 +46,10 @@
     --ring: 172 66% 40%;
 
     /* Sidebar */
-    --sidebar: 222 47% 11%;
-    --sidebar-foreground: 210 20% 90%;
+    --sidebar: 210 20% 98%;
+    --sidebar-foreground: 222 32% 18%;
     --sidebar-accent: 172 66% 40%;
-    --sidebar-hover: 222 32% 18%;
+    --sidebar-hover: 214 20% 90%;
 
     /* Charts */
     --chart-1: 172 66% 40%;

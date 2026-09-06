@@ -1,6 +1,5 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import {
@@ -14,6 +13,9 @@ import {
 } from 'lucide-react';
 import { StatCard } from '@/components/dashboard/stat-card';
 import { QuickActions } from '@/components/dashboard/quick-actions';
+import { AreaChartCard } from '@/components/dashboard/area-chart-card';
+import { BarChartCard } from '@/components/dashboard/bar-chart-card';
+import { PlatformBreakdown } from '@/components/dashboard/platform-breakdown';
 import { useAuth } from '@/lib/auth/context';
 import { useAnalyticsSnapshots, usePlatformAnalytics } from '@/hooks/use-analytics';
 import { useCampaigns } from '@/hooks/use-campaigns';
@@ -21,22 +23,6 @@ import { useCampaignPosts } from '@/hooks/use-posts';
 import type { AnalyticsSnapshot, Campaign } from '@/types/database';
 import { Loader2 } from 'lucide-react';
 
-const DashboardSectionLoading = () => (
-  <div className="h-72 animate-pulse rounded-xl border border-border bg-card/60" />
-);
-
-const AreaChartCard = dynamic(
-  () => import('@/components/dashboard/area-chart-card').then((module) => module.AreaChartCard),
-  { loading: DashboardSectionLoading }
-);
-const BarChartCard = dynamic(
-  () => import('@/components/dashboard/bar-chart-card').then((module) => module.BarChartCard),
-  { loading: DashboardSectionLoading }
-);
-const PlatformBreakdown = dynamic(
-  () => import('@/components/dashboard/platform-breakdown').then((module) => module.PlatformBreakdown),
-  { loading: DashboardSectionLoading }
-);
 const platformColors = ['hsl(var(--chart-1))', 'hsl(var(--chart-2))', 'hsl(var(--chart-3))', 'hsl(var(--chart-4))', 'hsl(var(--chart-5))'];
 
 function getRange(daysAgo: number, length: number) {
@@ -244,19 +230,15 @@ export default function DashboardPage() {
                 { key: 'value2', color: 'hsl(var(--chart-2))', label: 'Ad Spend' },
               ]}
             />
-          ) : (
-            <DashboardSectionLoading />
-          )}
+          ) : null}
         </div>
-        {showDeferredSections ? <PlatformBreakdown data={platformData} totalReach={platformReach} /> : <DashboardSectionLoading />}
+        {showDeferredSections ? <PlatformBreakdown data={platformData} totalReach={platformReach} /> : null}
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {showDeferredSections ? (
           <BarChartCard title="Weekly Engagement" data={engagementData} />
-        ) : (
-          <DashboardSectionLoading />
-        )}
+        ) : null}
         {showDeferredSections ? (
           <div className="rounded-xl border border-border bg-card p-5 lg:col-span-2">
             <h3 className="text-sm font-semibold text-foreground">Live campaign activity</h3>
@@ -266,7 +248,7 @@ export default function DashboardPage() {
               <div className="rounded-lg bg-muted/30 p-4"><p className="text-xs text-muted-foreground">Scheduled posts</p><p className="mt-1 text-2xl font-bold text-foreground">{scheduledPosts.length}</p></div>
             </div>
           </div>
-        ) : <DashboardSectionLoading />}
+        ) : null}
       </div>
     </div>
   );
